@@ -1,0 +1,170 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Team Registration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: url('{% static "images/registerbg.png" %}') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Pirata One', cursive;
+            color: white;
+            text-align: center;
+        }
+        form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            width: 65%;
+            margin: auto;
+            border-radius: 10px;
+            min-height: max-content;
+        }
+        label {
+            display: block;
+            text-align: left;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            color: white;
+        }
+        button {
+            background: #1E1E1E;
+            color: #FFD700;
+            padding: 8px 15px;
+            text-decoration: none;
+            font-size: 22px;
+        }
+        .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    padding: 25px 20px;
+    color: white;
+}
+p, label{
+    font-size: 1.3rem;
+}
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 10%;
+    gap: 17%;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 30px;
+}
+.nav-links a:hover {
+    color: #FFD700;
+
+}
+
+.register-btn {
+    background: #1E1E1E;
+    color: #FFD700;
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 30px;
+    margin-right: 3%;
+}
+
+.burger-menu {
+    font-size: 24px;
+    display: none;
+    cursor: pointer;
+}
+.logo-top{
+            width: 250px;
+            margin-right: 20%;
+        }
+        @media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #222;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        padding: 10px 0;
+        text-align: center;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .burger-menu {
+        display: block;
+    }
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img class="logo-top" src="{% static 'images/bluelogo.svg' %}">
+        </div>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'schedule' %}">Schedule</a></li>
+            <li><a href="{% url 'sponsors' %}">Sponsors</a></li>
+            <li><a href="{% url 'rules' %}">Rules</a></li>
+        </ul>
+        <ul class="nav-links">
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
+            {% else %}
+                <li><a href="{% url 'register' %}" class="register-btn">Register</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
+        </ul>
+
+        <div class="burger-menu" onclick="toggleMenu()">☰</div>
+    </nav>
+    <h1>Login</h1>
+
+    <form method="post">
+        {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+        {% csrf_token %}
+        <label>Team Name:</label>
+        <input type="text" name="team_name" required>
+
+        <label>Password:</label>
+        <input type="password" name="password" required>
+        <br><br>
+        <button type="submit">Login</button>
+    </form>
+<br><br><br>
+<script>
+    function toggleMenu() {
+    const navLinks = document.querySelector(".nav-links");
+    navLinks.classList.toggle("show");
+    }
+
+  </script>
+</body>
+</html>

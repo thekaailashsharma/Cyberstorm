@@ -1,0 +1,221 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}About Cyberstorm{% endblock %}</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Pirata One', cursive;
+            text-align: center;
+            background-image: url('{% static "images/map.jpeg" %}');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            overflow-x: hidden;
+            position: relative;
+            height: 100%;
+            text-shadow: 2px, 2px, #1e1e1e;
+            min-height: 100vh;
+        }
+        /* Navbar */
+        .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    padding: 25px 20px;
+    color: white;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 10%;
+    gap: 10%;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: black;
+    font-size: 30px;
+}
+.nav-links a:hover {
+    color: #FFD700;
+
+}
+
+.register-btn {
+    background: #1E1E1E;
+    color: #FFD700;
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 30px;
+    margin-right: 3%;
+}
+
+.burger-menu {
+    font-size: 24px;
+    display: none;
+    cursor: pointer;
+}
+.logo-top{
+            width: 250px;
+            margin-right: 20%;
+        }
+        .register-btn:hover{
+            color:#FFD700;
+        }
+/* Responsive Design */
+@media (max-width: 800px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #222;
+        color: white;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        padding: 10px 0;
+        text-align: center;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+    .nav-links a{
+        color: white;
+    }
+
+    .burger-menu {
+        display: block;
+    }
+}
+        h1{
+            font-size: 3rem;
+            color: black;
+            align-self: center;
+            justify-self: center;
+        }
+        h3{
+            font-size: 1.5rem;
+            color: black;
+            align-self: center;
+            justify-self: center;
+            padding-left: 10%;
+            padding-right: 10%;
+        }
+        .container {
+            display: flex;
+          
+        }
+        .column {
+            flex: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        h2{
+            font-size: 2rem;
+            color: black;
+            align-self: center;
+            justify-self: center;
+        }
+     
+        </style>
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet">
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img class="logo-top" src="{% static 'images/logo.png' %}">
+        </div>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="">Schedule</a></li>
+            <li><a href="">Sponsors</a></li>
+            <li><a href="{% url 'rules' %}">Rules</a></li>        
+            {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    <li><a style="margin-right: 480px;" href="{% url 'profile' %}">Profile</a></li>
+                {% else %}
+                
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                
+            </ul>
+            <a  href="{% url 'register' %}" class="register-btn">Register</a>
+            {% endif %}
+
+        <div class="burger-menu" onclick="toggleMenu()">☰</div>
+    </nav>
+    {% block content %}  
+     <h1>CyberStorm: Mumbai’s Largest CTF Challenge</h1>
+   <h3>🔧 What is CyberStorm?</h3><h3>
+    The Ultimate Cybersecurity Battleground is Mumbai’s Largest Capture The Flag (CTF) Competition, designed to push cybersecurity enthusiasts, ethical hackers, and students to their limits. Hosted by Google Developer Groups On Campus SIES GST, this high-stakes competition challenges participants with real-world cybersecurity scenarios, testing their skills in cryptography, web exploitation, reverse engineering, and more.
+    </h3><br><br><br>
+    <h3>
+        Why is CyberStorm Mumbai’s Largest CTF? </h3><h3>
+
+✅ Biggest Participation – Hundreds of cybersecurity enthusiasts from across Mumbai.</h3><h3>
+    ✅ Most Intense Challenges – Covering advanced security domains to test true hacking skills.</h3><h3>
+✅ Elite Prizes & Recognition – Stand out as Mumbai’s Top Cybersecurity Talent.</h3><h3>
+✅ Expert Networking – Engage with industry professionals, ethical hackers, and top recruiters.</h3><h3>
+✅ Real-World Cyber Attacks – Simulated hacking scenarios that test your skills in real time.</h3><h3>
+
+
+    </h3><br><br><br><div class="container">
+        <div class="column">
+            <h3>
+                🏆 Exciting Rewards & Recognition:</h3>
+        <h3>Cash prizes, certificates, and exclusive goodies for top performers
+        Special awards for Best OSINT Hunter, Reverse Engineering Master, and More!
+        </h3>
+        </div>
+        <div class="column">
+            <h3>
+                💼 Networking & Learning:</h3><h3>
+                Connect with industry experts, ethical hackers, and sponsors
+                Get insights into cybersecurity careers and cutting-edge security trends
+                
+                    </h3>
+            </div>
+    </div><br><br>
+    <h2>
+        Are You Ready to Capture the Flag?
+    </h2>
+    <h2>
+        One Day. One Flag. One Champion
+    </h2>
+    <h2>
+        Will You Be Mumbai’s Top Hacker?
+    </h2>
+    <img src="{% static 'images/ctabutton.png' %}" id = "ctabutton" height="220px">
+    {% endblock %}
+<script>
+    function toggleMenu() {
+    const navLinks = document.querySelector(".nav-links");
+    navLinks.classList.toggle("show");
+    }
+</script>
+</body>
+</html>

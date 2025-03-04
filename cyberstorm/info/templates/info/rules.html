@@ -1,0 +1,326 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rules of Cyberstorm</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Pirata One', cursive;
+            text-align: center;
+            background-image: url('{% static "images/rulesbg.png" %}');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            overflow-x: hidden;
+            position: relative;
+            height: 100%;
+            min-height: 100vh;
+            color: white;
+        }
+        /* Navbar */
+        .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    padding: 25px 20px;
+    color: white;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 10%;
+    gap: 10%;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 30px;
+}
+.nav-links a:hover {
+    color: #FFD700;
+
+}
+
+.register-btn {
+    background: #1E1E1E;
+    color: #FFD700;
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 30px;
+    margin-right: 3%;
+}
+
+.burger-menu {
+    font-size: 24px;
+    display: none;
+    cursor: pointer;
+}
+.logo-top{
+            width: 250px;
+            margin-right: 12%;
+        }
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #222;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        padding: 10px 0;
+        text-align: center;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .burger-menu {
+        display: block;
+    }
+}
+        .card {
+    width: 400px;
+    height: 300px;
+    perspective: 1000px;
+  }
+  
+  .card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.999s;
+  }
+  
+  .card:hover .card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  .card-front,
+  .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+  }
+  
+  .card-front {
+    background-color: #1e1e1e;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    border: 10px solid #1e1e1e;
+    border-radius: 10px;
+    justify-content: center;
+    font-size: 24px;
+    transform: rotateY(0deg);
+  }
+  
+  .card-back {
+    background-color: #1D3557;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    border: 10px solid #1D3557;
+    border-radius: 10px;
+    justify-content: center;
+    font-size: 24px;
+    transform: rotateY(180deg);
+    padding: 2%;
+  }
+  .threerow{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .three-column {
+    justify-content: center;
+    display: flex;
+    width: 33.33%;
+  }
+  
+  /* Clear floats after the columns */
+  .threerow:after {
+    content: "";
+    display: table;
+    clear: both;
+  }  
+  p{
+    font-size: larger;
+  }
+  .twocontainer {
+            display: flex;
+          
+        }
+
+        .column {
+            flex: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        @media (max-width: 768px) {
+            .twocontainer, .threerow {
+                flex-direction: column;
+                align-items: center;
+            }
+            .column, .three-column{
+                width: 100%;
+                margin-bottom: 10%;
+            }
+            .right{
+                display: none;
+            }
+            .register-btn{
+        font-size: 18px;
+    }
+    .logo-top{
+    width: 180px;
+    }
+        }
+        .nav-open .container {
+    margin-top: 200px; /* Adjust this value as needed */
+    transition: margin-top 0.3s ease-in-out;
+}
+
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+        <img class="logo-top" src="{% static 'images/bluelogo.svg' %}">
+    </div>
+    <ul class="nav-links">
+      <li><a href="{% url 'home' %}">Home</a></li>
+      <li><a href="{% url 'about' %}">About</a></li>
+      <li><a href="">Schedule</a></li>
+      <li><a href="">Sponsors</a></li>
+      <li><a href="{% url 'rules' %}">Rules</a></li>
+  
+      {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    <li style="margin-right: 480px;"><a href="{% url 'profile' %}" class="register-btn">Profile</a></li>
+                {% else %}
+                
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                
+            </ul>
+            <a href="{% url 'register' %}" class="register-btn">Register</a>
+            {% endif %}
+    <div class="burger-menu" onclick="toggleMenu()">☰</div>
+</nav>
+
+    <div class="container">
+        <center><h1 style="font-size: xx-large;">Rules</h1></center>
+        <br>
+        <center><div class="threerow">
+            <div class="three-column">
+        <div class="card">
+            <div class="card-inner">
+              <div class="card-front">
+                <p>General Rules</p>
+              </div>
+              <div class="card-back steps step">
+                <center><p>Fair play is mandatory. No cheating or exploits.</p><p>
+                    Only one account per participant.  </p><p>
+                    Respect fellow participants and organizers.</p><p>
+                    Organizers' decisions are final.</p></center>
+                </div>
+            </div>
+        </div></div>
+        <div class="three-column">
+            <div class="card">
+                <div class="card-inner">
+                  <div class="card-front">
+                    <p>Team Formation Rules</p>
+                  </div>
+                  <div class="card-back steps step">
+                    <center><p>Teams must have 2-4 members.</p><p>
+                        No participant can join multiple teams.</p><p>
+                        Register before the event starts.</p></center>
+                  </div>
+                </div>
+          </div></div>
+          <div class="three-column">
+          <div class="card">
+            <div class="card-inner">
+              <div class="card-front">
+                <p>Challenge Rules</p>
+              </div>
+              <div class="card-back steps step">
+                <center><p>Topics include Web, Crypto, OSINT etc.</p><p>
+                    Points vary based on difficulty.</p><p>
+                    Submit flags in flag{example} format.</p></center>
+              </div>
+            </div></div>
+    </div></center></div>
+  </div><br><br>
+  <div class="twocontainer">
+    <div class="column">
+        <div class="card">
+            <div class="card-inner">
+              <div class="card-front">
+                <p>Prohibited Actions</p>
+              </div>
+              <div class="card-back steps step">
+                <center><p>No DDoS or server attacks.</p><p>
+                    No flag sharing between teams.</p><p>
+                    No exploiting unintended bugs.</p><p>
+                    No phishing or illegal activities.</p></center>
+              </div>
+            </div></div>
+
+    </div>
+    <div class="column">
+        <div class="card">
+            <div class="card-inner">
+              <div class="card-front">
+                <p>Scoring and Prizes</p>
+              </div>
+              <div class="card-back steps step">
+                <center><p>Rankings based on total points.</p><p>
+                            In case of a tie, last solved challenge decides.</p><p>
+                            Winners receive prizes & certificates.</p></center>
+              </div>
+            </div></div>
+
+        </div></div><br><br><br>
+        <script>
+          function toggleMenu() {
+    const navLinks = document.querySelector(".nav-links");
+    const container = document.querySelector(".container");
+
+    navLinks.classList.toggle("show");
+    document.body.classList.toggle("nav-open");
+}
+
+        </script>
+</body>
+</html>

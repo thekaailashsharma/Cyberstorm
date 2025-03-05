@@ -1,0 +1,1 @@
+web: gunicorn cyberstorm.wsgi --log-file -

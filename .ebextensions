@@ -1,0 +1,10 @@
+option_settings:
+  aws:elasticbeanstalk:container:python:
+    WSGIPath: cyberstorm.wsgi:application
+  aws:elasticbeanstalk:environment:proxy:staticfiles:
+    /static: staticfiles
+
+packages:
+  yum:
+    git: []
+    postgresql-devel: []

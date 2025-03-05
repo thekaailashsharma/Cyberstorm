@@ -17,7 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 import dj_database_url
 
-ALLOWED_HOSTS = ["cyberstorm.onrender.com"]
+ALLOWED_HOSTS = ["*"]
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -36,7 +36,7 @@ LOGOUT_REDIRECT_URL = "login"
 
 DATABASES = {
     "default": dj_database_url.config(
-        default="postgres://sneharamanathan:Ttlsh1wwy@@localhost:5432/cyberstorm"
+        default="postgresql://neondb_owner:npg_MECv2OYsKW1Q@ep-green-king-a8gvbiy5-pooler.eastus2.azure.neon.tech/neondb?sslmode=require"
     )
 }
 
@@ -45,6 +45,15 @@ DATABASES = {
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_DEFAULT_ACL = 'public-read'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
